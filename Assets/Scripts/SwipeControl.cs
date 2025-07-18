@@ -137,9 +137,6 @@ public class SwipeControl : MonoBehaviour
             direction = swipEnd - swipStart;
             direction2D = new Vector2(direction.x, direction.y).normalized;
 
-           
-           //  swipeDistance = Vector2.Distance(startPosition, endPosition);
-
             ball.ballRb.useGravity = true;
             velocity =ball.CreateBallVelocity(swipStart, direction, swipeTime, swipeDistance);
             landingPos = ball.CalculateLandingPoint(swipStart, velocity, 18.24f);
@@ -168,8 +165,8 @@ public class SwipeControl : MonoBehaviour
             Ball ball = Ball.Instance;
 
             float swipeTime = (endTime - startTime);
-            swipStart = startPosition;
-            swipEnd = endPosition;
+            swipEnd   = startPosition;
+            swipStart = endPosition;
             //direction of the ballPrefab in 2D, z is 0 currently
            direction = endPosition - startPosition;
           // direction2D = new Vector2(direction.x, direction.y).normalized;
@@ -237,7 +234,6 @@ public class SwipeControl : MonoBehaviour
        List<Vector3> path = new List<Vector3>();
         int noOfPoints = 40;
 
-        float distance2D = Vector2.Distance(start, end);
         float arcFactor = 0.7f; //  control arc height 
         float swipeDistance = Vector2.Distance(startPosition, endPosition);
        
@@ -372,7 +368,7 @@ public class SwipeControl : MonoBehaviour
             yield return new WaitForFixedUpdate(); ;
         }
 
-        AddForceAtTheEnd(path);
+        Ball.Instance.AddForceAtTheEnd(path);
 
     }
     private Vector3 CalculateQuadraticBezierPoint(Vector3 p0, Vector3 p1, Vector3 p2, float t)
@@ -390,20 +386,20 @@ public class SwipeControl : MonoBehaviour
         //point.z = point.z * t; //adding the z axis for depth
         return points;
     }
-    public void AddForceAtTheEnd(List<Vector3> path)
-    {
-        Vector3 start = path[path.Count - 15];
-        Vector3 end = path[path.Count - 10];
-        Vector3 ballPos = Ball.Instance.transform.position;
-       Vector3 direction = (end - start);
-        //  Vector3 direction = ballPrefab.transform.LookAt(ballPos, Vector3.forward ); //addforce tryed but stil shit
+    //public void AddForceAtTheEnd(List<Vector3> path)
+    //{
+    //    Vector3 start = path[path.Count - 15];
+    //    Vector3 end = path[path.Count - 10];
+    //    Vector3 ballPos = Ball.Instance.transform.position;
+    //   Vector3 direction = (end - start);
+    //    //  Vector3 direction = ballPrefab.transform.LookAt(ballPos, Vector3.forward ); //addforce tryed but stil shit
         
-       // Ball.Instance.ballRb.WakeUp();
-        //Debug.Log("Force direction: " + direction);
-        Ball.Instance.ballRb.AddForce(direction * 4f, ForceMode.VelocityChange);
-        /* Debug.Log("Force direction: " + direction);*/
+    //   // Ball.Instance.ballRb.WakeUp();
+    //    //Debug.Log("Force direction: " + direction);
+    //    Ball.Instance.ballRb.AddForce(direction * 4f, ForceMode.VelocityChange);
+    //    /* Debug.Log("Force direction: " + direction);*/
 
-    }
+    //}
   
     
     private void SwipeDirection(Vector2 direction)

@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections;
-using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
@@ -70,26 +71,7 @@ public class Ball : MonoBehaviour
         }
 
     }
-    public float BallDirection()
-    {
-         ballDirection = ballRb.linearVelocity.normalized;
-         directionToPlayer = (transform.position - transform.position).normalized;// cant take the player position p=p=p[=p=[
-         dot = Vector3.Dot(ballDirection, directionToPlayer);
-       
-        ////Ball is moving toward the player
-        if (dot > 0)
-        {
-            return dot;
-            //Debug.Log("Ball is moving toward the player");
-        }
-        else if (dot < 0)
-        {
-            // Debug.Log("Ball is moving away from the player");
-            return dot;
-        }
-        else
-            return 0;
-    }
+  
     public Vector3 CreateBallVelocity(Vector3 startPoint, Vector3 direction, float swipeTime, float swipeDistance)
     {
         //Debug.Log("directionvelocity " + direction);
@@ -188,5 +170,17 @@ public class Ball : MonoBehaviour
             Debug.LogError("Ball landingPos is " + lp);
             return Vector3.zero;
         }
+    }
+    public void AddForceAtTheEnd(List<Vector3> path)
+    {
+        Vector3 start = path[path.Count - 15];
+        Vector3 end = path[path.Count - 10];
+        Vector3 ballPos = transform.position;
+        Vector3 direction = (end - start);
+      direction.z = direction.z * 2f; // Adjusting the z component for a more realistic trajectory
+        Debug.Log("direction " + direction);
+        ballRb.AddForce(direction * 4f, ForceMode.VelocityChange);
+        ballRb.AddTorque(Vector3.Cross(direction, Vector3.up) * 4f, ForceMode.VelocityChange);
+
     }
 }

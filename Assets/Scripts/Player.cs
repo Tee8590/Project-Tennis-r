@@ -55,11 +55,15 @@ public class Player : MonoBehaviour
         if (IsTargetInRange(ballPos) & ball != null)
         {
             Vector3 currentPosition = transform.position;
-            float targetZ = ballPos.z-2f;
-
-           targetZ = Mathf.Lerp(currentPosition.z, targetZ, moveSpeed * Time.deltaTime);
+            float targetZ = ballPos.z;
+            if (transform.gameObject.name == "Player1")
+                targetZ = ballPos.z -7f;
+            if (transform.gameObject.name == "Player2")
+                targetZ = ballPos.z + 7f;
+            targetZ = Mathf.Lerp(currentPosition.z, targetZ, moveSpeed * Time.deltaTime);
             float targetX = Mathf.Lerp(currentPosition.x, ball.transform.position.x, moveSpeed * Time.deltaTime);
             transform.position = new Vector3(targetX, currentPosition.y, targetZ);
+            Vector3 movepos = new Vector3(targetX, currentPosition.y, targetZ);
         }
     }
     public bool IsTargetInRange(Vector3 target)
@@ -70,6 +74,7 @@ public class Player : MonoBehaviour
         float maxX = center.x + 10f;
         float minZ = center.z - 10f;
         float maxZ = center.z + 10f;
+
 
         if (target.x >= minX && target.x <= maxX &&
                 target.z >= minZ && target.z <= maxZ)

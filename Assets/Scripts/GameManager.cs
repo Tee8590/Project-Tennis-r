@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     private int playerOneScore = 0;
     private int playerTwoScore = 0;
-    
+    public Transform netTransform;
 
     public bool isPlayerOneServing = true;
     public bool isBallTouched = false;
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         BallHitDetection.OnBallHit   += HandleServeRotation;
         SwipeControl.OnSwipe         += HandleSwipesRotation;
         CollitionDetection.PredictedLandingPoint += HandlePredictedLandingPoint;
-       CollitionDetection.OnSecondHit += SecondBallHitOrOut;
+       //CollitionDetection.OnSecondHit += SecondBallHitOrOut;
 
     }
     private void OnDisable()
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         BallHitDetection.OnBallHit -= HandleServeRotation;
         SwipeControl.OnSwipe -= HandleSwipesRotation;
         CollitionDetection.PredictedLandingPoint -= HandlePredictedLandingPoint;
-      CollitionDetection.OnSecondHit -= SecondBallHitOrOut;
+      //CollitionDetection.OnSecondHit -= SecondBallHitOrOut;
     }
     private bool CheckBallHit()
     {
