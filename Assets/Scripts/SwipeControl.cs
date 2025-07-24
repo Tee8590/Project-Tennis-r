@@ -157,8 +157,9 @@ public class SwipeControl : MonoBehaviour
    
     public bool DetectSwipe()
     {
-        Debug.Log("IIIIIIIIIIIIxxxxxxxxxxxxxxxxxxxxxxxxxxstartPosition --" + startPosition+ " --endPosition "+ endPosition);
-        Debug.Log("IIIIIIIIIIIIIxxxxxxxxxxxxxxxxxxstartTime --" + startTime+ "--endTime " + endTime);
+        //comment
+        //Debug.Log("IIIIIIIIIIIIxxxxxxxxxxxxxxxxxxxxxxxxxxstartPosition --" + startPosition+ " --endPosition "+ endPosition);
+        //Debug.Log("IIIIIIIIIIIIIxxxxxxxxxxxxxxxxxxstartTime --" + startTime+ "--endTime " + endTime);
         if (Vector2.Distance(startPosition, endPosition) >= minimumDistance && (endTime - startTime) <= maxTime)
         {
             GameManager gameManager = GameManager.Instance;

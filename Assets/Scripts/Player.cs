@@ -57,11 +57,12 @@ public class Player : MonoBehaviour
             Vector3 currentPosition = transform.position;
             float targetZ = ballPos.z;
             if (transform.gameObject.name == "Player1")
-                targetZ = ballPos.z -7f;
+                targetZ = ballPos.z -5f;
             if (transform.gameObject.name == "Player2")
-                targetZ = ballPos.z + 7f;
+                targetZ = ballPos.z + 5f;
             targetZ = Mathf.Lerp(currentPosition.z, targetZ, moveSpeed * Time.deltaTime);
             float targetX = Mathf.Lerp(currentPosition.x, ball.transform.position.x, moveSpeed * Time.deltaTime);
+
             transform.position = new Vector3(targetX, currentPosition.y, targetZ);
             Vector3 movepos = new Vector3(targetX, currentPosition.y, targetZ);
         }

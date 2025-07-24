@@ -309,8 +309,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7.0847535, y: 2.220446e-16, z: 37.123943}
-  m_Center: {x: -3.4756427, y: 0, z: 3.846278}
+  m_Size: {x: 7.0109906, y: 2.220446e-16, z: 37.123943}
+  m_Center: {x: -3.4387586, y: 0, z: 3.845782}
 --- !u!114 &157318683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -716,7 +716,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.1395565, y: 0, z: 0, w: 0.9902141}
-  m_LocalPosition: {x: 297.06, y: 30, z: -19.44}
+  m_LocalPosition: {x: 297.06, y: 30.17, z: -19.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2727,7 +2727,7 @@ Transform:
   m_GameObject: {fileID: 1098011722}
   serializedVersion: 2
   m_LocalRotation: {x: 0.1395565, y: -0, z: -0, w: 0.9902141}
-  m_LocalPosition: {x: 297.06, y: 30, z: -19.44}
+  m_LocalPosition: {x: 297.06, y: 30.17, z: -19.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3243,8 +3243,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 15.218517, y: 2.220446e-16, z: 12.657533}
-  m_Center: {x: 0.5954353, y: 0, z: 3.1685297}
+  m_Size: {x: 15.167042, y: 2.220446e-16, z: 12.657533}
+  m_Center: {x: 0.6211732, y: 0, z: 3.1685297}
 --- !u!114 &1274049879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3477,8 +3477,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7.0847535, y: 2.220446e-16, z: 37.171307}
-  m_Center: {x: -3.4737308, y: 0, z: 3.5381486}
+  m_Size: {x: 7.0847535, y: 2.220446e-16, z: 37.17131}
+  m_Center: {x: -3.4737308, y: 0, z: 3.5381494}
 --- !u!114 &1487527346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4219,8 +4219,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 14.985801, y: 2.220446e-16, z: 12.657533}
-  m_Center: {x: -7.4219613, y: 0, z: 3.1685297}
+  m_Size: {x: 14.855329, y: 2.220446e-16, z: 12.657533}
+  m_Center: {x: -7.4871974, y: 0, z: 3.1685297}
 --- !u!114 &1882873816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4572,7 +4572,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -5007,7 +5007,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.022783412, z: -0, w: -0.9997404}
   m_LocalPosition: {x: 294.9, y: 20.066553, z: 20.2}
-  m_LocalScale: {x: 0.5, y: 1.9, z: 0.3}
+  m_LocalScale: {x: 0.5, y: 1, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7458716458166648349}
@@ -5023,7 +5023,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 298.86, y: 20.14, z: -7.9}
-  m_LocalScale: {x: 0.5, y: 1.9, z: 0.3}
+  m_LocalScale: {x: 0.5, y: 1, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3268622862538102483}
@@ -5094,7 +5094,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d0012950a8e74884f8856ea622467b6d, type: 2}
+  - {fileID: 2100000, guid: 8124e64feac79d647ace79a13a4172a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5260,8 +5260,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 3.8268697}
-  m_Center: {x: 0, y: 0, z: 0.24866661}
+  m_Size: {x: 1, y: 1.426353, z: 3.8268697}
+  m_Center: {x: 0, y: -0.21317595, z: 0.24866669}
 --- !u!54 &7687287657226533006
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5312,7 +5312,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d0012950a8e74884f8856ea622467b6d, type: 2}
+  - {fileID: 2100000, guid: 549372b1f8edc3440a74fec30f62846d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5376,8 +5376,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 2.6621022}
-  m_Center: {x: 0, y: 0, z: 0.83105093}
+  m_Size: {x: 1, y: 1.3632033, z: 2.6621022}
+  m_Center: {x: -8.051766e-10, y: -0.18160173, z: 0.83105075}
 --- !u!136 &9220739519612207418
 CapsuleCollider:
   m_ObjectHideFlags: 0

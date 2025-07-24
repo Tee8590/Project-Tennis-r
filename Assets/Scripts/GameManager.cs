@@ -121,12 +121,12 @@ public class GameManager : MonoBehaviour
         
         player1Position = GameObject.FindGameObjectWithTag("Player1");
         player2Position = GameObject.FindGameObjectWithTag("Player2");
-        Debug.Log("-------player1Position  " + player1Position.ToString());
+        //Debug.Log("-------player1Position  " + player1Position.ToString());
         //Ball.Instance.OnLandingCalculated += HandlePredictedLandingPoint;
         p1InitPos = player1Position.transform.position;
         p2InitPos = player2Position.transform.position;
         CreateBall(player1Position);
-        Debug.Log("-------p1InitPos  " + p1InitPos.ToString());
+       // Debug.Log("-------p1InitPos  " + p1InitPos.ToString());
         IsServerRightSide = true;
     }
     public void SetGameStarted(bool value)
@@ -202,29 +202,28 @@ public class GameManager : MonoBehaviour
     {
         ballCollitions = 1;
     }
-    void HandleZoneHit(CourtZoneType zoneType, CollitionDetection cortObj , Collision collition)
+    void HandleZoneHit(CourtZoneType zoneType, CollitionDetection cortObj , Collider Collider)
     {
        // if (!isBallInPlay) return;
         
         switch (zoneType)
         {
             case CourtZoneType.LeftServiceBox:
+
                 
-                Debug.Log("LeftServiceBox Valid serve zone");
+               // Debug.Log("LeftServiceBox Valid serve zone");
                 if (CheckServeLegality(zoneType))
                 {
                     //UpdateServeCount();
                     if (P1serveCount > 2 || P2serveCount >2)
                     {
-                        Debug.Log(P1serveCount + "P1serveCount && " + P2serveCount + " P2serveCount");
-                        //AwardPointToPlayers();
-                        //ResetServeCount();
+                       
                         SwitchServer();
                     }
                 }
                 else
                 {
-                    Debug.Log(P1serveCount + "P1serveCount && " + P2serveCount + " P2serveCount");
+                  
                     // Valid serve: reset serve count and start rally.
                     ResetServeCount();
                    // isBallInPlay = false;
@@ -232,43 +231,39 @@ public class GameManager : MonoBehaviour
                 break;
 
             case CourtZoneType.Net:
-                
-                Debug.Log("Ball hit the net - fault or let");
+            
+                //Debug.Log("Ball hit the net - fault or let");
                 // Ball hit the net: fault or point for opponent.
-                StartCoroutine(ShowStatus("Net"));
-               
-               
-               
+              SwichingPlayerPositionsToInitial(); StartCoroutine(ShowStatus("Net")); StartCoroutine(SwitchBallPositions());
+                AwardPointToCurrentPlayer(); SwitchServer(); ResetServeCount();
+
+
                 //SecondBallHitOrOut( zoneType);
                 break;
 
             case CourtZoneType.BackRunOff:
-
-                Debug.Log(P1serveCount + "P1serveCount && " + P2serveCount + " P2serveCount");
-                Debug.Log("Ball hit BackRunOff - checking if in or out");
+               
+               
+              //  Debug.Log("Ball hit BackRunOff - checking if in or out");
                 // Ball landed beyond the baseline (out-of-bounds): point to opponent.
-                StartCoroutine(ShowStatus("Out-BackRunOff"));
-                //SecondBallHitOrOut(zoneType);
+               SwichingPlayerPositionsToInitial(); StartCoroutine(ShowStatus("Out-BackRunOff")); StartCoroutine(SwitchBallPositions());
+                AwardPointToCurrentPlayer(); SwitchServer(); ResetServeCount();
                 break;
 
             case CourtZoneType.SideRunOff:
 
-                Debug.Log(P1serveCount + "P1serveCount && " + P2serveCount + " P2serveCount");
-                Debug.Log("Ball hit sideline - checking for out call");
+              
+               // Debug.Log("Ball hit sideline - checking for out call");
                 // Ball landed beyond the sidelines (out-of-bounds): point to opponent.
-             
-                StartCoroutine(ShowStatus("Out-SideRunOff"));
+               SwichingPlayerPositionsToInitial();
+                StartCoroutine(ShowStatus("Out-SideRunOff")); StartCoroutine(SwitchBallPositions());
+                AwardPointToCurrentPlayer(); SwitchServer(); ResetServeCount();
                 //SecondBallHitOrOut(zoneType);
                 break;
 
             case CourtZoneType.Backcourt:
-
-                Debug.Log(P1serveCount + "P1serveCount && " + P2serveCount + " P2serveCount");
-               /* Debug.Log("Backcourt - point to opponent");*/
-                //StartCoroutine(ShowStatus());
-                //AwardPointToPlayers();
-                SwitchServer();
-                Debug.Log("Ball hit backcourt - checking for in bounds");
+               
+              //  Debug.Log("Ball hit backcourt - checking for in bounds");
                 // TODO: Apply point logic based on rally
                 break;
 
@@ -300,8 +295,7 @@ public class GameManager : MonoBehaviour
             case CourtZoneType.None:
             default:
                 // Ball did not hit any recognized zone: treat as out-of-bounds.
-                Debug.Log(P1serveCount + "P1serveCount && " + P2serveCount + " P2serveCount");
-                //AwardPointToPlayers();
+             
                 SwitchServer();
                 break;
         }
@@ -346,6 +340,7 @@ public class GameManager : MonoBehaviour
     }
     private void SwitchServer()
     {
+        
         IsServerRightSide = !IsServerRightSide;
         isBallInPlay = false;
         Debug.Log("Server switched");
@@ -366,7 +361,11 @@ public class GameManager : MonoBehaviour
 
     void AwardPointToCurrentPlayer()
     {
-        if (isPlayerOneServing)
+        if (isPlayerOneServing && P1serveCount > 1 || P1serveCount==1)
+            playerTwoScore++;
+        else if (!isPlayerOneServing && P2serveCount > 1 || P2serveCount==1)
+            playerOneScore++;
+        else if (isPlayerOneServing)
             playerOneScore++;
         else
             playerTwoScore++;
@@ -397,23 +396,24 @@ public class GameManager : MonoBehaviour
         Debug.Log($"ZoneType: {zones}, IsServerRightSide: {IsServerRightSide}, tag:{tag}");
         //if ( tag == "ServiceBox")
         {
+            // for serving into self service box
             if ((isPlayerOneServing && tag == "ServiceBox" )|| !isPlayerOneServing && tag == "P2ServiceBox")
             {
-                Debug.Log("++++++++++Wrong ServiceBox");
+             //   Debug.Log("++++++++++Wrong ServiceBox");
                 StartCoroutine(SwitchBallPositions());
                 StartCoroutine(ShowStatus("Wrong ServiceBox - Invalid Serve!!"));
                 /*AwardPointToCurrentPlayer();*/
-                //SwichingPlayerPositionsToInitial();
+                SwichingPlayerPositionsToInitial();
 
             }
             else  if (!IsServerRightSide && zones == CourtZoneType.LeftServiceBox)
             {
-                Debug.Log("<<<<<<<<<!IsServerRightSid");
+              //  Debug.Log("<<<<<<<<<!IsServerRightSid");
                 return;
             }
             else if (IsServerRightSide && zones == CourtZoneType.RightServiceBox)
             {
-                Debug.Log("++++++++++IsServerRightSid");
+               // Debug.Log("++++++++++IsServerRightSid");
                 return;
             }
             else
@@ -425,48 +425,29 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        //if (tag.ToString() == ("CommonCort") || tag.ToString() == ("ServiceBox"))
-        //{
-        //    Debug.Log("---------------------CommonCort");
-        //    return zones; /*CourtZoneType.None;*/ // or handle this appropriately
-        //}
+      
         return ;
     }
     public void SwichingPlayerPositionsToInitial()
     {
-
+     isBallInPlay = false;
         if (switchValue == 0)
         {
-            Debug.Log("(((((((((((((((((((((((((((((((");
+           
             switchValue = 5;
             StartCoroutine(SetPlayerPositionToInitial(switchValue, player2Position));
             IsServerRightSide = !IsServerRightSide;
         }
         else
         {
-            Debug.Log(")))))))))))))))))))))))))))))))))))))))))))))))))))))))))))");
+           
             switchValue = 0;
             StartCoroutine(SetPlayerPositionToInitial(switchValue, player1Position));
             IsServerRightSide = !IsServerRightSide;
         }
     }
-    void CheckZoneType(CourtZoneType zoneType)
-    {
-        //if(zoneType.)
-    }
-    private void AwardPointToPlayers(string status)
-    {// show if its fault or out
-        StartCoroutine(ShowStatus(status));
-        // move player to the position
-
-        // award points
-        if (isPlayerOneServing & isBallTouched )
-            playerTwoScore++;
-        else if(!isPlayerOneServing & isBallTouched)
-            playerOneScore++;
-
-        //Debug.Log($"Score - Player1SwingAction 1: {playerOneScore}, Player1SwingAction 2: {playerTwoScore}");
-    }
+   
+  
     public IEnumerator SwitchBallPositions()
     {
         isBallInPlay = false;
@@ -519,10 +500,10 @@ public class GameManager : MonoBehaviour
     }
     private void UpdateUI()
     {
-        scoreText.text = "player1 : " + playerOneScore + "   player2 : " + playerTwoScore;
+        scoreText.text = "Player1 : " + playerOneScore + "   Player2 : " + playerTwoScore;
         //  infoText.text = "P1 " + P1serveCount + "--P2  " + P2serveCount /*+ "     player1 : " + playerOneScore + "   player2: " + playerTwoScore + "HasCollided "*/ + hasCollidedFromColliders + " isBallInPlay" + isBallInPlay + "   isBallTouched " + isBallTouched + " RightSide?=" + IsServerRightSide;
-        infoText.text = "P1 " + P1serveCount + "--P2  " + P2serveCount + "----ballCollitions: " + ballCollitions + " isBallInPlay" + isBallInPlay;
-        // TODO: Implement UI update logic, like setting text fields or scoreboards
+      //  infoText.text = "P1 " + P1serveCount + "--P2  " + P2serveCount + "----ballCollitions: " + ballCollitions + " isBallInPlay" + isBallInPlay;
+        //// TODO: Implement UI update logic, like setting text fields or scoreboards
     }
     private IEnumerator ShowStatus(string status)
     {
@@ -606,5 +587,5 @@ public class GameManager : MonoBehaviour
         else
             Debug.LogWarning("isBallInPlay is true - continuing without resetting");
        
-    }//Reset the count so that it won't show out on the Ist ball touch////////////////////
+    }
 }

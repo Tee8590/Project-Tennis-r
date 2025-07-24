@@ -20,8 +20,7 @@ public class Ball : MonoBehaviour
     public Transform ballSpawnPoint;
     public Vector3 launchDirection = Vector3.forward;
     public float launchForce;
-    //public int noOfPoints; // Number of points drawn
-    //public float timeStep; // Time between each point
+   
     public GameObject trailBallPrefab; // Prefab with Rigidbody and Trail Renderer
     public int noOfPoints = 50;
     public float timeStep = 0.1f;
@@ -178,8 +177,8 @@ public class Ball : MonoBehaviour
         Vector3 ballPos = transform.position;
         Vector3 direction = (end - start);
       direction.z = direction.z * 2f; // Adjusting the z component for a more realistic trajectory
-        Debug.Log("direction " + direction);
-        ballRb.AddForce(direction * 4f, ForceMode.VelocityChange);
+        
+        ballRb.AddForce(direction * 4f, ForceMode.VelocityChange); 
         ballRb.AddTorque(Vector3.Cross(direction, Vector3.up) * 4f, ForceMode.VelocityChange);
 
     }
