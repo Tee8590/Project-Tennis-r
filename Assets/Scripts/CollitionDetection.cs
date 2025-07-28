@@ -46,9 +46,7 @@ public class CollitionDetection : MonoBehaviour
     //}
     private void OnTriggerEnter(Collider collider)
     {
-
-
-       
+     
         if (GameManager.Instance.isBallInPlay && GameManager.Instance.GameStarted)
         {
             if (collider.gameObject.CompareTag("Ball"))

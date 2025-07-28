@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     private int PreviousP2serveCount =0;    
     public int P2serveCount = 0;
     public bool isBallInPlay = false;
-    private bool IsServerRightSide = true;
+    private bool IsServerRightSide = false;
     public Vector3 ballLandingPoint;
     private int switchValue = 0;
     public bool hasCollidedFromColliders = false;
@@ -349,7 +349,7 @@ public class GameManager : MonoBehaviour
     {
         P1serveCount = 0;
         P2serveCount = 0;
-
+        hasCollidedFromColliders = false;
     }
     public void UpdateServeCount()
     {
@@ -370,7 +370,7 @@ public class GameManager : MonoBehaviour
         else
             playerTwoScore++;
 
-       Debug.Log($"Score - Player1SwingAction 1: {playerOneScore}, Player1SwingAction 2: {playerTwoScore}");
+       Debug.Log($"Score - PlayerSwingAction 1: {playerOneScore}, PlayerSwingAction 2: {playerTwoScore}");
        
     }
     

@@ -505,6 +505,7 @@ GameObject:
   - component: {fileID: 228482653}
   - component: {fileID: 228482652}
   - component: {fileID: 228482656}
+  - component: {fileID: 228482657}
   m_Layer: 3
   m_Name: Wall-L
   m_TagString: Untagged
@@ -527,7 +528,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
@@ -628,6 +629,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &228482657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228482651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9bbad922cc99f4a854985c6135e664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoneType: 6
+  HasCollided: 0
+  collided2nd: 0
+  trailBallPrefab: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,7 +706,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 61.2
+  field of view: 50
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -715,8 +732,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1395565, y: 0, z: 0, w: 0.9902141}
-  m_LocalPosition: {x: 297.06, y: 30.17, z: -19.39}
+  m_LocalRotation: {x: 0.2164396, y: 0, z: 0, w: 0.97629607}
+  m_LocalPosition: {x: 297, y: 32.68, z: -24.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1634,6 +1651,7 @@ GameObject:
   - component: {fileID: 775042282}
   - component: {fileID: 775042281}
   - component: {fileID: 775042285}
+  - component: {fileID: 775042286}
   m_Layer: 3
   m_Name: Wall-B
   m_TagString: Untagged
@@ -1656,7 +1674,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
@@ -1757,6 +1775,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &775042286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775042280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9bbad922cc99f4a854985c6135e664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoneType: 6
+  HasCollided: 0
+  collided2nd: 0
+  trailBallPrefab: {fileID: 0}
 --- !u!1 &811554765
 GameObject:
   m_ObjectHideFlags: 0
@@ -2409,7 +2443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!96 &989975268
 TrailRenderer:
   serializedVersion: 3
@@ -2535,7 +2569,7 @@ Transform:
   m_GameObject: {fileID: 989975267}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 295.9854, y: 20.90182, z: 481.14142}
+  m_LocalPosition: {x: 295.9854, y: 56, z: 481.14142}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2726,13 +2760,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1098011722}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1395565, y: -0, z: -0, w: 0.9902141}
-  m_LocalPosition: {x: 297.06, y: 30.17, z: -19.39}
+  m_LocalRotation: {x: 0.2164396, y: 0, z: 0, w: 0.97629607}
+  m_LocalPosition: {x: 297, y: 32.68, z: -24.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 16.044, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
 --- !u!114 &1098011725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2786,7 +2820,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 61.2
+    FieldOfView: 50
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -4413,6 +4447,7 @@ GameObject:
   - component: {fileID: 1915310421}
   - component: {fileID: 1915310420}
   - component: {fileID: 1915310424}
+  - component: {fileID: 1915310425}
   m_Layer: 3
   m_Name: Wall-R
   m_TagString: Untagged
@@ -4435,7 +4470,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
@@ -4536,6 +4571,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &1915310425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915310419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9bbad922cc99f4a854985c6135e664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoneType: 6
+  HasCollided: 0
+  collided2nd: 0
+  trailBallPrefab: {fileID: 0}
 --- !u!1 &1955818795
 GameObject:
   m_ObjectHideFlags: 0
@@ -4810,6 +4861,7 @@ GameObject:
   - component: {fileID: 2015367940}
   - component: {fileID: 2015367944}
   - component: {fileID: 2015367946}
+  - component: {fileID: 2015367947}
   m_Layer: 3
   m_Name: Wall_F
   m_TagString: Untagged
@@ -4832,7 +4884,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
@@ -4945,6 +4997,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015367939}
   m_CullTransparentMesh: 1
+--- !u!114 &2015367947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015367939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9bbad922cc99f4a854985c6135e664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoneType: 6
+  HasCollided: 0
+  collided2nd: 0
+  trailBallPrefab: {fileID: 0}
 --- !u!114 &986023736683198029
 MonoBehaviour:
   m_ObjectHideFlags: 0

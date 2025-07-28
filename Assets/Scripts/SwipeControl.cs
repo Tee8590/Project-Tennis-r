@@ -150,8 +150,7 @@ public class SwipeControl : MonoBehaviour
             gameManager.isPlayerOneServing = false;
             gameManager.isBallTouched = false;
 
-            ball.speed = 11f;
-            ball.maxSpeed =11f;
+           
         }
     }
    
@@ -173,6 +172,7 @@ public class SwipeControl : MonoBehaviour
           // direction2D = new Vector2(direction.x, direction.y).normalized;
 
             swipeDistance = Vector2.Distance(startPosition, endPosition);
+            swipeDistance *= 2f;
             SwipeDirection(direction2D); 
 
             //ballRb.useGravity = true;
@@ -197,21 +197,16 @@ public class SwipeControl : MonoBehaviour
     }
     public void MakeBallMovement( Vector3 startPoint,   Vector3 landingPoint)
     {
-        /* swipeTime = (endTime - startTime);
-        //direction of the ballPrefab in 2D, z is 0 currently
-        direction = endPosition - startPosition;*/
-      //  direction2D = new Vector2(direction.x, direction.y).normalized;
+       
         if (GameManager.Instance.isPlayerOneServing)
         {
-            //CreateBall();
-            // BallMovement(ballrb, direction, swipeTime);
+            
             DrawQuadraticBezierPoint(startPoint,  landingPoint);
             GameManager.Instance.SetServer(false);
         }
         if (!GameManager.Instance.isPlayerOneServing)
         {
-            //CreateBall();
-            // BallMovement(ballrb, direction, swipeTime);
+           
             DrawQuadraticBezierPoint(startPoint,  landingPoint);
             GameManager.Instance.SetBallTouched(true);
         }
@@ -239,6 +234,7 @@ public class SwipeControl : MonoBehaviour
         float swipeDistance = Vector2.Distance(startPosition, endPosition);
        
         middlePosition = (start + end)  / 2f + Vector3.up * swipeDistance * arcFactor;
+        middlePosition.y += 2f;
          //Debug.Log("middlePosition" + middlePosition);
         for (int i = 0; i <= noOfPoints; i++)
         {
@@ -258,97 +254,7 @@ public class SwipeControl : MonoBehaviour
        StartCoroutine(MoveAlongPath(Ball.Instance.ballRb.gameObject, path, 1.0f));
     }
 
-    //public Rigidbody CreateBall()
-    //{
-    //    if (Ball.Instance == null)
-    //    {
-    //        //Position     Debug.Log("ballPrefab is  null");
-    //        ballPrefab.transform.position = new Vector3(player.transform.position.x,
-    //            player.transform.position.y +1f,
-    //            player.transform.position.z + -0.1f);
-    //        ballPrefab = Instantiate(ballPrefab); ballPrefab.name = "Ball";
-
-    //        ballrb = ballPrefab.GetComponent<Rigidbody>();
-    //        /*BallPhysicsOff();*/
-    //        return ballrb;
-    //    }
-    //    else
-    //    {
-    //        //if(ballrb != null & ballPrefab != null) 
-    //        {
-    //            Debug.Log("ball Instance is not null");
-    //     /*       ballrb.transform.position = new Vector3(player.transform.position.x,
-    //              player.transform.position.y,
-    //              player.transform.position.z + 2f);*/
-    //           /* BallPhysicsOff();*/
-    //        }
- 
-    //        return ballrb;
-    //    }
-    //}
-    /* public Rigidbody BallPhysicsOff()
-     {
-         ballrb.linearVelocity = Vector3.zero;
-         ballrb.angularVelocity = Vector3.zero;
-         ballrb.useGravity = false; return ballrb;
-     }*/
-    /*private void FixedUpdate()
-    {
-
-        if (DetectSwipe() && currentPathIndex >= path.Count)
-        {
-            Vector3 targetPosition = path[currentPathIndex];
-            Vector3 currentPosition = Ball.Instance.ballRb.position;
-            Vector3 direction = (targetPosition - currentPosition).normalized;
-            float distance = Vector3.Distance(currentPosition, targetPosition);
-            // Calculate movement step
-            float step = 14f * Time.fixedDeltaTime;
-            if (step >= distance)
-            {
-                // Move directly to the target position and advance to the next point
-                Ball.Instance.ballRb.MovePosition(targetPosition);
-                currentPathIndex++;
-
-                if (currentPathIndex >= path.Count)
-                {
-                    isMoving = false;
-                    // Optionally, call AddForceAtTheEnd or any other method here
-                }
-            }
-            else
-            {
-                // Move towards the target position
-                Vector3 newPosition = currentPosition + direction * step;
-                Ball.Instance.ballRb.MovePosition(newPosition);
-            }
-        }
-    }*/
-    /*public void MoveAlongThePath2(GameObject ball, List<Vector3> path, float duration)
-    {
-
-        float totalLength = path.Count - 1;
-        float elapsed = 0f;
-        while (elapsed < duration)
-        {
-
-            float t = elapsed / duration * totalLength;
-            int i = Mathf.FloorToInt(t);
-            float u = t - i;              // local interpolation between path[i] -> path[i+1]
-
-            Rigidbody rb = Ball.Instance.ballRb;
-            rb.useGravity = true;
-            if (i < path.Count - 1)
-                //rb.MovePosition(Vector3.Lerp(path[i], path[i + 1], u));
-                target = path[i + 1];
-            Vector3 direction = (target - rb.position).normalized;
-            rb.AddForce(direction * 2, ForceMode.VelocityChange);
-
-            elapsed += Time.deltaTime;
-
-        }
-
-        AddForceAtTheEnd(path, ball);
-    }*/
+   
     public IEnumerator MoveAlongPath(GameObject ball, List<Vector3> path, float duration)
     {
         Rigidbody rb = Ball.Instance.ballRb;

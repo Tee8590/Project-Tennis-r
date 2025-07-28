@@ -50,23 +50,18 @@ public class Ball : MonoBehaviour
 
     void Start()
     {
-        speed = 9f;
-        maxSpeed = speed;
        
-        /*if(ballObj == null)
-        {
-            ballObj = Instantiate(gameObject); ballObj.name = "Ball";
-            ballRb = ballObj.GetComponent<Rigidbody>();
-        }*/
         ballSpawnPoint = gameObject.transform;
         
        
         //ballRb.AddForce(-Vector3.forward * 50f * Time.deltaTime, ForceMode.Impulse);
     }
     void FixedUpdate()
-    {if(speed>maxSpeed)
+    {
+        if (speed > maxSpeed)
         {
-            SpeedControl();
+            speed = maxSpeed;
+            // ballRb.velocity = ballRb.velocity.normalized * speed;
         }
 
     }
@@ -90,25 +85,25 @@ public class Ball : MonoBehaviour
         Vector3 ballDir = new Vector3(ogDirection.x, ogDirection.y, ogDirection.z);
         Vector3 velocity = ogDirection.normalized * speed ;
         ballRb.WakeUp();
-        //CalculateLandingPoint(startPoint, velocity, 18.24f);
-        /*ballRb.AddForce(velocity, ForceMode.Impulse);*/
-        /*  Debug.Log("velocity " + velocity);*/
-        // BallStartAndEndpositions?.Invoke(ballRb, startPoint, CalculateLandingPoint(startPoint, velocity, 18.24f));
-        //SpeedControl();
+       
         return velocity;
     }
 
     public void SpeedControl()
     {
-        Vector3 ballVel = new Vector3(ballRb.linearVelocity.x, ballRb.linearVelocity.y, ballRb.linearVelocity.z);
+        //Vector3 ballVel = new Vector3(ballRb.linearVelocity.x, ballRb.linearVelocity.y, ballRb.linearVelocity.z);
 
-        if (ballVel.magnitude > maxSpeed)
+        //if (ballVel.magnitude > maxSpeed)
+        //{
+        //    speed = maxSpeed;
+        //    Vector3 limitBallVel = ballVel.normalized * speed;
+        //    ballRb.linearVelocity = new Vector3(limitBallVel.x, limitBallVel.y, limitBallVel.z);
+        //}
+        if (speed > maxSpeed)
         {
             speed = maxSpeed;
-            Vector3 limitBallVel = ballVel.normalized * speed;
-            ballRb.linearVelocity = new Vector3(limitBallVel.x, limitBallVel.y, limitBallVel.z);
+           // ballRb.velocity = ballRb.velocity.normalized * speed;
         }
-
     }
 
     
@@ -177,8 +172,15 @@ public class Ball : MonoBehaviour
         Vector3 ballPos = transform.position;
         Vector3 direction = (end - start);
       direction.z = direction.z * 2f; // Adjusting the z component for a more realistic trajectory
-        
-        ballRb.AddForce(direction * 4f, ForceMode.VelocityChange); 
+       if(GameManager.Instance.isPlayerOneServing)
+        {
+            if (direction.z < 0)
+            {
+                direction.z = -direction.z; // Ensure positive z direction for player one serving
+            }
+            
+        }
+        ballRb.AddForce(direction * 2f, ForceMode.VelocityChange); 
         ballRb.AddTorque(Vector3.Cross(direction, Vector3.up) * 4f, ForceMode.VelocityChange);
 
     }
