@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviour
         CreateBall(player1Position);
        // Debug.Log("-------p1InitPos  " + p1InitPos.ToString());
         IsServerRightSide = true;
+        StartCoroutine(ShowStatus("Serve To The Right Service Box"));
     }
     public void SetGameStarted(bool value)
     {
@@ -347,9 +348,11 @@ public class GameManager : MonoBehaviour
     }
     private void ResetServeCount()
     {
+        
         P1serveCount = 0;
         P2serveCount = 0;
         hasCollidedFromColliders = false;
+        
     }
     public void UpdateServeCount()
     {
@@ -393,7 +396,7 @@ public class GameManager : MonoBehaviour
     }
     private void ValidatePredictedLandingPoint(CourtZoneType zones, string tag)
     {
-        Debug.Log($"ZoneType: {zones}, IsServerRightSide: {IsServerRightSide}, tag:{tag}");
+        Debug.Log($"ZoneType: {zones}, IsServerRightSide: {IsServerRightSide}, tag:{tag}, isPlayerOneServing:{isPlayerOneServing}");
         //if ( tag == "ServiceBox")
         {
             // for serving into self service box
@@ -419,7 +422,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 StartCoroutine(SwitchBallPositions());
-                StartCoroutine(ShowStatus("Invalid Serve!!"));
+                StartCoroutine(ShowStatus("fault!!"));
                 /*AwardPointToCurrentPlayer();*/
                 //SwichingPlayerPositionsToInitial();
             }
@@ -511,8 +514,12 @@ public class GameManager : MonoBehaviour
         infoText.gameObject.SetActive(true);
         infoText.text = status;
 
-        yield return new WaitForSeconds(5f);
-
+        yield return new WaitForSeconds(3f);
+        if (IsServerRightSide)
+            infoText.text ="Serve To The Right Service Box";
+        else
+            infoText.text = "Serve To The Left Service Box";
+        yield return new WaitForSeconds(3f);
         infoText.gameObject.SetActive(false);
         scoreText.gameObject.SetActive(true);
     }

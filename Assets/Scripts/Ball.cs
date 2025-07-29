@@ -171,7 +171,7 @@ public class Ball : MonoBehaviour
         Vector3 end = path[path.Count - 10];
         Vector3 ballPos = transform.position;
         Vector3 direction = (end - start);
-      direction.z = direction.z * 2f; // Adjusting the z component for a more realistic trajectory
+      direction = direction * 2f; // Adjusting the z component for a more realistic trajectory
        if(GameManager.Instance.isPlayerOneServing)
         {
             if (direction.z < 0)
