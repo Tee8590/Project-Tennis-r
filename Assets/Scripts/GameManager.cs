@@ -19,13 +19,13 @@ public enum CourtZoneType
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    private int playerOneScore = 0;
-    private int playerTwoScore = 0;
+    public int playerOneScore = 0;
+    public int playerTwoScore = 0;
     public Transform netTransform;
 
     public bool isPlayerOneServing = true;
     public bool isBallTouched = false;
-
+    public bool isValidServe = false;
     [SerializeField]
     private GameObject plane;
     [SerializeField]
@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         CollitionDetection.OnZoneHit += HandleZoneHit;
+        
         BallHitDetection.OnBallHit   += HandleServeRotation;
         SwipeControl.OnSwipe         += HandleSwipesRotation;
         CollitionDetection.PredictedLandingPoint += HandlePredictedLandingPoint;
@@ -203,7 +204,7 @@ public class GameManager : MonoBehaviour
     {
         ballCollitions = 1;
     }
-    void HandleZoneHit(CourtZoneType zoneType, CollitionDetection cortObj , Collider Collider)
+    void HandleZoneHit(CourtZoneType zoneType, CollitionDetection cortObj)
     {
        // if (!isBallInPlay) return;
         
@@ -319,34 +320,42 @@ public class GameManager : MonoBehaviour
         //if ball lands on the servies box 
             if (IsServerRightSide && zoneType == CourtZoneType.LeftServiceBox)
             {
-            return false;
-
+                isValidServe = false;
+                return false;
+               
             }
             else if (IsServerRightSide && zoneType == CourtZoneType.RightServiceBox)
             {
             IsServerRightSide = false;
-            return true;
+                isValidServe = true;
+                return true;
             }
 
             if (!IsServerRightSide && zoneType == CourtZoneType.RightServiceBox)
-                return false;
+            {
+                isValidServe = false;
+                return false; 
+            }
             else if (!IsServerRightSide && zoneType == CourtZoneType.LeftServiceBox)
-                return true;
+            { 
+                isValidServe = true; 
+                return true; }
             else
             {
+                isValidServe = false;
                 Debug.LogError("Invalid Serve");
                 return false;
             }
         }
     }
-    private void SwitchServer()
+    public void SwitchServer()
     {
         
         IsServerRightSide = !IsServerRightSide;
         isBallInPlay = false;
         Debug.Log("Server switched");
     }
-    private void ResetServeCount()
+    public void ResetServeCount()
     {
         
         P1serveCount = 0;
@@ -362,15 +371,17 @@ public class GameManager : MonoBehaviour
         { P1serveCount++; }
     }
 
-    void AwardPointToCurrentPlayer()
+   public  void AwardPointToCurrentPlayer()
     {
-        if (isPlayerOneServing && P1serveCount > 1 || P1serveCount==1)
+        if (isPlayerOneServing && isValidServe == true)
+            playerOneScore++;
+        else if (isPlayerOneServing && P1serveCount > 1 && isValidServe == false)
             playerTwoScore++;
-        else if (!isPlayerOneServing && P2serveCount > 1 || P2serveCount==1)
-            playerOneScore++;
-        else if (isPlayerOneServing)
-            playerOneScore++;
-        else
+        else if (!isPlayerOneServing && P2serveCount > 1 && isValidServe == true)
+            playerTwoScore++;
+        //else if (isPlayerOneServing && isValidServe == true)
+        //    playerOneScore++;
+        else if (!isPlayerOneServing && isValidServe == true)
             playerTwoScore++;
 
        Debug.Log($"Score - PlayerSwingAction 1: {playerOneScore}, PlayerSwingAction 2: {playerTwoScore}");
@@ -462,7 +473,7 @@ public class GameManager : MonoBehaviour
         else
         {
             CreateBall(player2Position);
-            StartCoroutine(ResetIsBallInPlay());
+           // StartCoroutine(ResetIsBallInPlay());
         }
        
     }
@@ -470,8 +481,8 @@ public class GameManager : MonoBehaviour
     {
         Vector3 p1pos  = p1InitPos;
         Vector3 p2pos  = p2InitPos;
-        p1pos.x -= val;
-        p2pos.x += val;
+        p1pos.x += val;
+        p2pos.x -= val;
        isBallInPlay = false;////////////////////////////////////////////
         
         yield return new WaitForSeconds(3f);
@@ -508,7 +519,7 @@ public class GameManager : MonoBehaviour
       //  infoText.text = "P1 " + P1serveCount + "--P2  " + P2serveCount + "----ballCollitions: " + ballCollitions + " isBallInPlay" + isBallInPlay;
         //// TODO: Implement UI update logic, like setting text fields or scoreboards
     }
-    private IEnumerator ShowStatus(string status)
+    public IEnumerator ShowStatus(string status)
     {
         scoreText.gameObject.SetActive(false);
         infoText.gameObject.SetActive(true);
