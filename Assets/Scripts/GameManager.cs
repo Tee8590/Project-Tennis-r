@@ -357,7 +357,7 @@ public class GameManager : MonoBehaviour
     {
         
         IsServerRightSide = !IsServerRightSide;
-        isBallInPlay = false;
+     //   isBallInPlay = false;
         Debug.Log("Server switched");
     }
     public void ResetServeCount()
@@ -525,7 +525,7 @@ public class GameManager : MonoBehaviour
     {
         scoreText.text = "Player1 : " + playerOneScore + "   Player2 : " + playerTwoScore;
         //  infoText.text = "P1 " + P1serveCount + "--P2  " + P2serveCount /*+ "     player1 : " + playerOneScore + "   player2: " + playerTwoScore + "HasCollided "*/ + hasCollidedFromColliders + " isBallInPlay" + isBallInPlay + "   isBallTouched " + isBallTouched + " RightSide?=" + IsServerRightSide;
-      // infoText.text = "P1 " + P1serveCount + "--P2  " + P2serveCount + "----ballCollitions: " + ballCollitions + " isBallInPlay" + isBallInPlay;
+        //infoText.text = "P1 " + P1serveCount + "--P2  " + P2serveCount + "----ballCollitions: " + ballCollitions + " isBallInPlay" + isBallInPlay;
         //// TODO: Implement UI update logic, like setting text fields or scoreboards
     }
     public IEnumerator ShowStatus(string status)
