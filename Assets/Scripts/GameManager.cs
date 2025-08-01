@@ -244,20 +244,20 @@ public class GameManager : MonoBehaviour
                 break;
 
             case CourtZoneType.BackRunOff:
-               
-               
-              //  Debug.Log("Ball hit BackRunOff - checking if in or out");
+
+                isValidServe = false;
+                //  Debug.Log("Ball hit BackRunOff - checking if in or out");
                 // Ball landed beyond the baseline (out-of-bounds): point to opponent.
-               SwichingPlayerPositionsToInitial(); StartCoroutine(ShowStatus("Out-BackRunOff")); StartCoroutine(SwitchBallPositions());
+                SwichingPlayerPositionsToInitial(); StartCoroutine(ShowStatus("Out-BackRunOff")); StartCoroutine(SwitchBallPositions());
                 AwardPointToCurrentPlayer(); SwitchServer(); ResetServeCount();
                 break;
 
             case CourtZoneType.SideRunOff:
 
-              
-               // Debug.Log("Ball hit sideline - checking for out call");
+                isValidServe = false;
+                // Debug.Log("Ball hit sideline - checking for out call");
                 // Ball landed beyond the sidelines (out-of-bounds): point to opponent.
-               SwichingPlayerPositionsToInitial();
+                SwichingPlayerPositionsToInitial();
                 StartCoroutine(ShowStatus("Out-SideRunOff")); StartCoroutine(SwitchBallPositions());
                 AwardPointToCurrentPlayer(); SwitchServer(); ResetServeCount();
                 //SecondBallHitOrOut(zoneType);
@@ -309,12 +309,17 @@ public class GameManager : MonoBehaviour
         //zone.zoneType = zoneType;
         if(isPlayerOneServing && tag == "ServiceBox" || !isPlayerOneServing && tag == "P2ServiceBox")
         {
+            isValidServe = false;
             Debug.Log("Condition Met-----(isPlayerOneServing && zoneType == CourtZoneType.P1Cort " +
                 "|| !isPlayerOneServing && zoneType == CourtZoneType.P2Cort)");
             StartCoroutine(ShowStatus("Out!"));
            
         }
-        if (P1serveCount >= 1 || P2serveCount >= 1) return true;
+        if (P1serveCount >= 1 || P2serveCount >= 1)
+        {
+            isValidServe = true;
+            return true; 
+        }
         else
         {
         //if ball lands on the servies box 
@@ -413,7 +418,8 @@ public class GameManager : MonoBehaviour
             // for serving into self service box
             if ((isPlayerOneServing && tag == "ServiceBox" )|| !isPlayerOneServing && tag == "P2ServiceBox")
             {
-             //   Debug.Log("++++++++++Wrong ServiceBox");
+                isValidServe = false;
+                //   Debug.Log("++++++++++Wrong ServiceBox");
                 StartCoroutine(SwitchBallPositions());
                 StartCoroutine(ShowStatus("Wrong ServiceBox - Invalid Serve!!"));
                 /*AwardPointToCurrentPlayer();*/
@@ -422,16 +428,19 @@ public class GameManager : MonoBehaviour
             }
             else  if (!IsServerRightSide && zones == CourtZoneType.LeftServiceBox)
             {
-              //  Debug.Log("<<<<<<<<<!IsServerRightSid");
+                isValidServe = true;
+                //  Debug.Log("<<<<<<<<<!IsServerRightSid");
                 return;
             }
             else if (IsServerRightSide && zones == CourtZoneType.RightServiceBox)
             {
-               // Debug.Log("++++++++++IsServerRightSid");
+                isValidServe = true;
+                // Debug.Log("++++++++++IsServerRightSid");
                 return;
             }
             else
             {
+                isValidServe = false;
                 StartCoroutine(SwitchBallPositions());
                 StartCoroutine(ShowStatus("fault!!"));
                 /*AwardPointToCurrentPlayer();*/
@@ -516,7 +525,7 @@ public class GameManager : MonoBehaviour
     {
         scoreText.text = "Player1 : " + playerOneScore + "   Player2 : " + playerTwoScore;
         //  infoText.text = "P1 " + P1serveCount + "--P2  " + P2serveCount /*+ "     player1 : " + playerOneScore + "   player2: " + playerTwoScore + "HasCollided "*/ + hasCollidedFromColliders + " isBallInPlay" + isBallInPlay + "   isBallTouched " + isBallTouched + " RightSide?=" + IsServerRightSide;
-      //  infoText.text = "P1 " + P1serveCount + "--P2  " + P2serveCount + "----ballCollitions: " + ballCollitions + " isBallInPlay" + isBallInPlay;
+      // infoText.text = "P1 " + P1serveCount + "--P2  " + P2serveCount + "----ballCollitions: " + ballCollitions + " isBallInPlay" + isBallInPlay;
         //// TODO: Implement UI update logic, like setting text fields or scoreboards
     }
     public IEnumerator ShowStatus(string status)

@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 109818317}
   - component: {fileID: 109818316}
   - component: {fileID: 109818320}
+  - component: {fileID: 109818321}
   m_Layer: 3
   m_Name: CourtBase
   m_TagString: Untagged
@@ -155,8 +156,8 @@ MeshCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 1
-  m_Enabled: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -256,6 +257,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 3
+--- !u!65 &109818321
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109818315}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 2.220446e-16, z: 10.000001}
+  m_Center: {x: 0.0000076293945, y: 0.0000009536743, z: -0.00000011920929}
 --- !u!1 &157318680
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,9 +287,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 157318681}
+  - component: {fileID: 157318684}
   - component: {fileID: 157318682}
   - component: {fileID: 157318683}
-  - component: {fileID: 157318684}
   m_Layer: 3
   m_Name: BoundryBack
   m_TagString: CommonCort
@@ -353,7 +375,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 3
+  m_CollisionDetection: 1
 --- !u!1 &162267973
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,8 +421,8 @@ GameObject:
   - component: {fileID: 228482655}
   - component: {fileID: 228482654}
   - component: {fileID: 228482653}
-  - component: {fileID: 228482652}
   - component: {fileID: 228482656}
+  - component: {fileID: 228482652}
   - component: {fileID: 228482657}
   m_Layer: 3
   m_Name: Wall-L
@@ -520,11 +542,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &228482657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1312,9 +1334,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 677848813}
+  - component: {fileID: 677848816}
   - component: {fileID: 677848814}
   - component: {fileID: 677848815}
-  - component: {fileID: 677848816}
   m_Layer: 3
   m_Name: P1LeftServiceCort
   m_TagString: ServiceBox
@@ -1400,7 +1422,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 3
+  m_CollisionDetection: 1
 --- !u!1 &735299772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,8 +1567,8 @@ GameObject:
   - component: {fileID: 775042284}
   - component: {fileID: 775042283}
   - component: {fileID: 775042282}
-  - component: {fileID: 775042281}
   - component: {fileID: 775042285}
+  - component: {fileID: 775042281}
   - component: {fileID: 775042286}
   m_Layer: 3
   m_Name: Wall-B
@@ -1666,11 +1688,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &775042286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1696,9 +1718,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 811554766}
+  - component: {fileID: 811554769}
   - component: {fileID: 811554767}
   - component: {fileID: 811554768}
-  - component: {fileID: 811554769}
   m_Layer: 3
   m_Name: P1RightServiceCort
   m_TagString: ServiceBox
@@ -1784,7 +1806,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 3
+  m_CollisionDetection: 1
 --- !u!1 &821656517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1829,9 +1851,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 829930278}
+  - component: {fileID: 829930281}
   - component: {fileID: 829930279}
   - component: {fileID: 829930280}
-  - component: {fileID: 829930281}
   m_Layer: 3
   m_Name: P2BacktCort
   m_TagString: CommonCort
@@ -1917,7 +1939,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 3
+  m_CollisionDetection: 1
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2234,9 +2256,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 983575102}
+  - component: {fileID: 983575105}
   - component: {fileID: 983575103}
   - component: {fileID: 983575104}
-  - component: {fileID: 983575105}
   m_Layer: 3
   m_Name: P2LeftServiceBox
   m_TagString: P2ServiceBox
@@ -2322,7 +2344,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 3
+  m_CollisionDetection: 1
 --- !u!1 &989975267
 GameObject:
   m_ObjectHideFlags: 0
@@ -2933,9 +2955,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1214356352}
+  - component: {fileID: 1214356355}
   - component: {fileID: 1214356353}
   - component: {fileID: 1214356354}
-  - component: {fileID: 1214356355}
   m_Layer: 3
   m_Name: P2RightServiceBox
   m_TagString: P2ServiceBox
@@ -3021,7 +3043,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 3
+  m_CollisionDetection: 1
 --- !u!1 &1240674488
 GameObject:
   m_ObjectHideFlags: 0
@@ -3031,9 +3053,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1240674489}
+  - component: {fileID: 1240674492}
   - component: {fileID: 1240674490}
   - component: {fileID: 1240674491}
-  - component: {fileID: 1240674492}
   m_Layer: 3
   m_Name: P1BackCort
   m_TagString: Untagged
@@ -3119,7 +3141,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 3
+  m_CollisionDetection: 1
 --- !u!1 &1274049876
 GameObject:
   m_ObjectHideFlags: 0
@@ -3129,9 +3151,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1274049877}
+  - component: {fileID: 1274049880}
   - component: {fileID: 1274049878}
   - component: {fileID: 1274049879}
-  - component: {fileID: 1274049880}
   m_Layer: 3
   m_Name: BoundryRight
   m_TagString: CommonCort
@@ -3217,7 +3239,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 3
+  m_CollisionDetection: 1
 --- !u!1 &1407623592
 GameObject:
   m_ObjectHideFlags: 0
@@ -3363,9 +3385,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1487527344}
+  - component: {fileID: 1487527347}
   - component: {fileID: 1487527345}
   - component: {fileID: 1487527346}
-  - component: {fileID: 1487527347}
   m_Layer: 3
   m_Name: BoundryFront
   m_TagString: CommonCort
@@ -3451,7 +3473,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 3
+  m_CollisionDetection: 1
 --- !u!1 &1611901205
 GameObject:
   m_ObjectHideFlags: 0
@@ -4192,9 +4214,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1882873814}
+  - component: {fileID: 1882873817}
   - component: {fileID: 1882873815}
   - component: {fileID: 1882873816}
-  - component: {fileID: 1882873817}
   m_Layer: 3
   m_Name: BoundryLeft
   m_TagString: CommonCort
@@ -4280,7 +4302,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 3
+  m_CollisionDetection: 1
 --- !u!1 &1899062371
 GameObject:
   m_ObjectHideFlags: 0
@@ -4428,8 +4450,8 @@ GameObject:
   - component: {fileID: 1915310423}
   - component: {fileID: 1915310422}
   - component: {fileID: 1915310421}
-  - component: {fileID: 1915310420}
   - component: {fileID: 1915310424}
+  - component: {fileID: 1915310420}
   - component: {fileID: 1915310425}
   m_Layer: 3
   m_Name: Wall-R
@@ -4549,11 +4571,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &1915310425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4581,9 +4603,9 @@ GameObject:
   - component: {fileID: 1955818799}
   - component: {fileID: 1955818798}
   - component: {fileID: 1955818797}
+  - component: {fileID: 1955818801}
   - component: {fileID: 1955818796}
   - component: {fileID: 1955818800}
-  - component: {fileID: 1955818801}
   m_Layer: 3
   m_Name: Net
   m_TagString: Untagged
@@ -4844,8 +4866,8 @@ GameObject:
   - component: {fileID: 2015367943}
   - component: {fileID: 2015367942}
   - component: {fileID: 2015367941}
-  - component: {fileID: 2015367940}
   - component: {fileID: 2015367944}
+  - component: {fileID: 2015367940}
   - component: {fileID: 2015367947}
   m_Layer: 3
   m_Name: Wall_F
@@ -4969,11 +4991,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &2015367947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5002,7 +5024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d84d4f2d4893d1c44b69956ac44181c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2.22
+  moveSpeed: 3.86
   ballHitDetection: {fileID: 0}
   ballPos: {x: 0, y: 0, z: 0}
 --- !u!114 &1043331959821896842

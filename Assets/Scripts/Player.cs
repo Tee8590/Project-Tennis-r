@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
            
         }
     }
-    void PlayerMovement()
+    public void PlayerMovement()
     {
         if(!GameManager.Instance.isBallInPlay) return;
 
